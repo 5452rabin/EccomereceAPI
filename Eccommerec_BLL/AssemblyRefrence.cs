@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Eccommerec_BLL.Abstraction;
+using Eccommerec_BLL.GenericRepository.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,10 @@ namespace Eccommerec_BLL
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddScoped<IUnitofWork,IUnitofWork>();
 
             return services;
         }
     }
 }
-}
+

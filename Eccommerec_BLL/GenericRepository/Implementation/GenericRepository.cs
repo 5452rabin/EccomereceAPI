@@ -11,34 +11,41 @@ namespace Eccommerec_BLL.GenericRepository.Implementation
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public T Add(T entity)
+        private readonly EccomereceDBContext _dbContext;
+        private readonly DbSet<T> _dbSet;
+        public GenericRepository(EccomereceDBContext dBContext) 
         {
-            throw new NotImplementedException();
+            _dbContext= dBContext;
+            _dbSet = dBContext.Set<T>();
+        }
+        public async Task Add(T entity)
+        {
+           await _dbSet.AddAsync(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
         }
 
         public List<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbSet.ToList();
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbSet.Find(id);
         }
 
         public IQueryable<T> GetDatas()
         {
-            throw new NotImplementedException();
+            return _dbSet;
         }
 
-        public T Update(T entity)
+        public async void Update(T entity)
         {
-            throw new NotImplementedException();
+           _dbSet.Update(entity);
         }
     }
 }
