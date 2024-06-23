@@ -14,17 +14,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.2-mauipre.1.22102.15" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.2-mauipre.1.22102.15" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Eccommerec_BLL\Eccommerec_BLL.csproj" />
     <ProjectReference Include="..\Ecommerece_DAL\Ecommerece_DAL.csproj" />
   </ItemGroup>
-	<ItemGroup>
-		<Reference Include="..\Eccommerec_BLL\Eccommerec_BLL.csproj"></Reference>
-		<Reference Include="..\Ecommerece_DAL\Ecommerece_DAL.csproj"></Reference>
 
-	</ItemGroup>
+  
+
+  
 
 </Project>

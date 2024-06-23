@@ -18,12 +18,15 @@ namespace Eccommerec_BLL.Abstraction
         public MapperProfile() 
         { 
             CreateMap<Category,CategoryDTO>().ReverseMap();
-            CreateMap<AddCategoryDTO, CategoryDTO>();
-            CreateMap<AddProductDTO,Product>();
+            CreateMap<Category,AddCategoryDTO>().ReverseMap();
+            CreateMap<AddCategoryDTO, CategoryDTO>().ReverseMap();
+            CreateMap<AddProductDTO,Product>().ReverseMap();
             CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<ProductDTO, AddProductDTO>().ReverseMap();
             CreateMap<CustomerDTO,Customer>().ReverseMap();
             CreateMap<ProductPhoto,Product_PhotoDTO>().ReverseMap();
-            CreateMap<>
+            CreateMap<CategoryPhoto,Category_PhotoDTO>().ReverseMap();
+           
         }
     }
 }

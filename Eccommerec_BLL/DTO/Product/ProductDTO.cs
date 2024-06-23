@@ -20,6 +20,6 @@ namespace Eccommerec_BLL.DTO.Product
         [Required]
         public decimal SellPrice { get; set; }
         public int CategoryId { get; set; }
-        public List<Product_PhotoDTO> Photos { get; set; }
+        public IEnumerable<Product_PhotoDTO> Photos { get; set; }
     }
 }

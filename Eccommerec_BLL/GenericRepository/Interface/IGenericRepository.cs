@@ -8,11 +8,12 @@ namespace Eccommerec_BLL.GenericRepository.Interface
 {
     public interface IGenericRepository<T> where T : class
     {
-        T Add(T entity);
+        Task<T> AddAsync(T entity);
         List<T> GetAll();
         T GetById(int id);
-        void Delete(int id);
-        T Update(T entity);
+        void Delete(T entity);
+        void DeleteById(int id);
+        void Update(T entity);
         IQueryable<T> GetDatas();
     }
 }

@@ -10,12 +10,11 @@ namespace Eccommerec_BLL.DTO.Category
 {
     public class AddCategoryDTO
     {
-<<<<<<< Updated upstream
+
         public string CategoryName { get; set; }
-        public List<Category_PhotoDTO> category_Photos { get; set; }
-=======
-        [Required]
-        public string CategoryName { get; set; }
->>>>>>> Stashed changes
+       
+       
+       
+
     }
 }
