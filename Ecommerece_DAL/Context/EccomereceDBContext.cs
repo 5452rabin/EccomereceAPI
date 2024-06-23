@@ -29,6 +29,7 @@ namespace Ecommerece_DAL.Context
             base.OnModelCreating(builder);
             builder.Entity<Order_Product>().HasNoKey();
             builder.Entity<ExploringProduct>().HasNoKey();
+ 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

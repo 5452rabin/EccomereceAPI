@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Eccommerec_BLL.GenericRepository.Interface
 {
-    public interface IUnitofWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IGenericRepository<T> Repository<T>() where T : class;
-        IDbContextTransaction BeginTransaction();
         Task<int> SaveChangesAsync();
-        void Dispose();
-        
+        IDbContextTransaction BeginTransaction(); 
     }
 }

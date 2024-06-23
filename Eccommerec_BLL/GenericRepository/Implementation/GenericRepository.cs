@@ -18,13 +18,23 @@ namespace Eccommerec_BLL.GenericRepository.Implementation
             _dbContext= dBContext;
             _dbSet = dBContext.Set<T>();
         }
-        public async Task Add(T entity)
+
+        public async Task<T> AddAsync(T entity)
         {
-           await _dbSet.AddAsync(entity);
+     
+          await _dbSet.AddAsync(entity);
+          return entity;
+            
         }
 
         public void Delete(T entity)
         {
+            _dbSet.Remove(entity);
+        }
+
+        public async void DeleteById(int id)
+        {
+            T entity= await _dbSet.FindAsync(id);
             _dbSet.Remove(entity);
         }
 
@@ -47,5 +57,6 @@ namespace Eccommerec_BLL.GenericRepository.Implementation
         {
            _dbSet.Update(entity);
         }
+       
     }
 }

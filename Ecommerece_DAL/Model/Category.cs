@@ -14,7 +14,7 @@ namespace Ecommerece_DAL.Model
         public int CategoryId { get; set; }
         [Required]
         public string CategoryName { get; set; }
-        
+        public ICollection<CategoryPhoto> categoryPhotos { get; set;}
 
     }
 }
