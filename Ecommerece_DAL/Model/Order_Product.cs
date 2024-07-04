@@ -15,5 +15,7 @@ namespace Ecommerece_DAL.Model
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
+        public int productquantity { get; set; }    
+        public string productQantityUnit { get; set; }
     }
 }

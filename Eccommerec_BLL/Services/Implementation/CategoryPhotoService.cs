@@ -26,13 +26,13 @@ namespace Eccommerec_BLL.Services.Implementation
             try
             {
                 CategoryPhoto categoryPhoto = _mapper.Map<CategoryPhoto>(categoryPhotoDTO);
-                _uow.Repository<CategoryPhoto>().AddAsync(categoryPhoto);
-                _uow.SaveChangesAsync();
+                await _uow.Repository<CategoryPhoto>().AddAsync(categoryPhoto);
+                await _uow.SaveChangesAsync();
                 transaction.Commit();
             }
             catch (Exception ex)
             {
-                transaction.RollbackAsync();
+                await transaction.RollbackAsync();
                 throw ex;
             }
         }

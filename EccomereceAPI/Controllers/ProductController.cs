@@ -25,7 +25,7 @@ namespace EccomereceAPI.Controllers
         {
             try
             {
-                return Ok(_productService.AddProduct(productDTO));
+                return Ok(await _productService.AddProduct(productDTO));
             }
             catch (Exception ex)
             {
@@ -60,11 +60,41 @@ namespace EccomereceAPI.Controllers
         }
         [HttpGet]
         [Route("GetProductById")]
-        public async Task<IActionResult> GetProductById(int productId)
+        public Task<IActionResult> GetProductById(int productId)
         {
-            return Ok(_productService.GetProductById(productId));
+            return Task.FromResult<IActionResult>(Ok(_productService.GetProductById(productId)));
         }
-
-
+        [HttpPost]
+        [Route("AddProductAsExplored")]
+        public async Task<IActionResult> AddProductExplored(int productId)
+        {
+            try
+            {
+               ProductDTO productDTO=await _productService.AddProductAsExplored(productId);
+               return Ok(productDTO);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.ToString());
+            }
+        }
+        [HttpGet]
+        [Route("GetAllExploredProducts")]
+        public async Task<IActionResult> GetAllExploredProducts()
+        {
+            return Ok(_productService.GetAllExploredProducts());
+        }
+        [HttpPost]
+        [Route("RemoveExploredProduct")]
+        public async Task<IActionResult> RemoveExploredProduct(int productId)
+        {
+            try
+            {
+                return Ok(await _productService.RemoveProductAsExplored(productId));
+            }
+            catch(Exception ex) { 
+            
+            return Ok(ex.ToString());}
+        }
     }
 }

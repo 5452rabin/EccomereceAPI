@@ -53,9 +53,10 @@ namespace Eccommerec_BLL.GenericRepository.Implementation
             return _dbSet;
         }
 
-        public async void Update(T entity)
+        public async Task<T> Update(T entity)
         {
            _dbSet.Update(entity);
+            return entity;
         }
        
     }

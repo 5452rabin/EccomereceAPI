@@ -18,17 +18,16 @@ namespace Ecommerece_DAL.Context
         public DbSet<Category> Category { get; set; }
         public DbSet<CategoryPhoto>CategoryPhoto { get; set; }
         public DbSet <Customer> Customer { get; set; }
-        public DbSet <ExploringProduct> ExploringProduct { get; set;}
         public DbSet<Product> Product { get; set; }
         public DbSet<ProductPhoto> ProductPhoto { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Order_Product> Order_Product { get; set; }
+        public DbSet<Sale> Sales { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.Entity<Order_Product>().HasNoKey();
-            builder.Entity<ExploringProduct>().HasNoKey();
  
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

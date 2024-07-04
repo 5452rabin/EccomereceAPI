@@ -30,6 +30,8 @@ namespace Eccommerec_BLL
             services.AddScoped<ICategoryPhotoService,CategoryPhotoService>();
             services.AddScoped<IProductService,ProductService>();
             services.AddScoped<IProductPhotoService,ProductPhotoService>();
+            services.AddScoped<IOrderService,OrderService>();
+            services.AddScoped<ICustomerService,CustomerService>();
             return services;
         }
     }

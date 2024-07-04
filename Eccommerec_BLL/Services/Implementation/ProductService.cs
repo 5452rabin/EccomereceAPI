@@ -6,6 +6,7 @@ using Ecommerece_DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,16 +30,16 @@ namespace Eccommerec_BLL.Services.Implementation
             try
             {
                 Product product = _mapper.Map<Product>(addproductDTO);
-                await _uow.Repository<Product>().AddAsync(product);
-                _uow.SaveChangesAsync();
-                transaction.Commit();
+                product=await _uow.Repository<Product>().AddAsync(product).ConfigureAwait(false);
+                await _uow.SaveChangesAsync().ConfigureAwait(false);
+                await transaction.CommitAsync().ConfigureAwait(false);
                 ProductDTO productDTO=_mapper.Map<ProductDTO>(product);
                 return productDTO;
             }
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -104,6 +105,55 @@ namespace Eccommerec_BLL.Services.Implementation
                 transaction.Rollback();
                 throw ex;
             }
+        }
+
+        public async Task<ProductDTO> AddProductAsExplored(int productId)
+        {
+            using var trasaction=_uow.BeginTransaction();
+            try
+            {
+                Product product= _uow.Repository<Product>().GetById(productId);
+                product.IsExplored=true;
+                product = await _uow.Repository<Product>().Update(product);
+                await _uow.SaveChangesAsync();
+                await trasaction.CommitAsync();
+                ProductDTO productDTO=_mapper.Map<ProductDTO>(product);
+                return productDTO;
+            }
+            catch(Exception ex)
+            {
+                trasaction.Rollback();
+                throw ex;
+            }
+
+        }
+
+        public async Task<ProductDTO> RemoveProductAsExplored(int productId)
+        {
+            using var transaction=_uow.BeginTransaction();
+            try
+            {
+                Product product = _uow.Repository<Product>().GetById(productId);
+                product.IsExplored=false;
+                await _uow.SaveChangesAsync();
+                await transaction.CommitAsync();
+                ProductDTO productDTO=_mapper.Map<ProductDTO>(product);
+                return productDTO;
+
+            }
+            catch(Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+
+        }
+
+        public List<ProductDTO> GetAllExploredProducts()
+        {
+            List<Product> products=_uow.Repository<Product>().GetAll().Where(x=>x.IsExplored==true).ToList();
+            List<ProductDTO> productDTOs=_mapper.Map<List<ProductDTO>>(products);
+            return productDTOs;
         }
     }
 }

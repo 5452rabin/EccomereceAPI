@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Ecommerece_DAL.Migrations
+namespace EccomereceAPI.Migrations
 {
     [DbContext(typeof(EccomereceDBContext))]
-    [Migration("20240510180109_init")]
-    partial class init
+    [Migration("20240704074811_newupadte")]
+    partial class newupadte
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -193,24 +193,6 @@ namespace Ecommerece_DAL.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("Ecommerece_DAL.Model.ExploringProduct", b =>
-                {
-                    b.Property<string>("Exploring_Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ExploringProduct");
-                });
-
             modelBuilder.Entity("Ecommerece_DAL.Model.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -240,6 +222,13 @@ namespace Ecommerece_DAL.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<string>("productQantityUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("productquantity")
+                        .HasColumnType("int");
+
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
@@ -265,9 +254,15 @@ namespace Ecommerece_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsExplored")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("SellPrice")
                         .HasColumnType("decimal(18,2)");
@@ -275,6 +270,8 @@ namespace Ecommerece_DAL.Migrations
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Product");
                 });
@@ -441,23 +438,12 @@ namespace Ecommerece_DAL.Migrations
             modelBuilder.Entity("Ecommerece_DAL.Model.CategoryPhoto", b =>
                 {
                     b.HasOne("Ecommerece_DAL.Model.Category", "Category")
-                        .WithMany()
+                        .WithMany("categoryPhotos")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Ecommerece_DAL.Model.ExploringProduct", b =>
-                {
-                    b.HasOne("Ecommerece_DAL.Model.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Ecommerece_DAL.Model.Order", b =>
@@ -497,6 +483,10 @@ namespace Ecommerece_DAL.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Ecommerece_DAL.Model.Order", null)
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId");
 
                     b.Navigation("Category");
                 });
@@ -561,6 +551,16 @@ namespace Ecommerece_DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Ecommerece_DAL.Model.Category", b =>
+                {
+                    b.Navigation("categoryPhotos");
+                });
+
+            modelBuilder.Entity("Ecommerece_DAL.Model.Order", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

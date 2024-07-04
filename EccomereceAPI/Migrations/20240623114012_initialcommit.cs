@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Ecommerece_DAL.Migrations
+namespace EccomereceAPI.Migrations
 {
-    public partial class init : Migration
+    public partial class initialcommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -223,7 +223,8 @@ namespace Ecommerece_DAL.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CostPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SellPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    IsExplored = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,24 +254,6 @@ namespace Ecommerece_DAL.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customer",
                         principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ExploringProduct",
-                columns: table => new
-                {
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Exploring_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.ForeignKey(
-                        name: "FK_ExploringProduct_Product_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
-                        principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -363,11 +346,6 @@ namespace Ecommerece_DAL.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExploringProduct_ProductId",
-                table: "ExploringProduct",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Order_CustomerId",
                 table: "Order",
                 column: "CustomerId");
@@ -412,9 +390,6 @@ namespace Ecommerece_DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "CategoryPhoto");
-
-            migrationBuilder.DropTable(
-                name: "ExploringProduct");
 
             migrationBuilder.DropTable(
                 name: "Order_Product");

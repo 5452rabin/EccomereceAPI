@@ -1,5 +1,4 @@
-﻿using Eccommerec_BLL.DTO.Order;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Eccommerec_BLL.DTO.User
 {
-    public class CustomerDTO
+    public class AddCustomerDTO
     {
-        [Key]
-        public int CustomerId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace Ecommerece_DAL.Model
 {
-    public class ExploringProduct
+    public class Sale
     {
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Exploring_Description { get; set; }
+        [Key]
+        public int SaleId { get; set; }
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
+        public int OrderId { get; set; }
+        [ForeignKey("OrderId")]
+        public virtual Order Order { get; set; }
+
+        public int Quantity { get; set; }
+
     }
 }

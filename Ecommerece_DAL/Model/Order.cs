@@ -16,6 +16,7 @@ namespace Ecommerece_DAL.Model
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
         [Required]
-        public DateTime DateTime { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+        
     }
 }

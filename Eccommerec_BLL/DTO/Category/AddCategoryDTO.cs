@@ -13,8 +13,6 @@ namespace Eccommerec_BLL.DTO.Category
 
         public string CategoryName { get; set; }
        
-       
-       
 
     }
 }

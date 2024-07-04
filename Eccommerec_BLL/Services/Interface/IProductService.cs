@@ -16,5 +16,11 @@ namespace Eccommerec_BLL.Services.Interface
         void DeleteProduct(int productId);
         void UpdateProduct(ProductDTO productDTO);
         Task<ProductDTO> AddProduct(AddProductDTO addproductDTO);
+
+        Task<ProductDTO> AddProductAsExplored(int productId);
+        Task<ProductDTO> RemoveProductAsExplored(int productId);
+        List<ProductDTO> GetAllExploredProducts();
+
+
     }
 }

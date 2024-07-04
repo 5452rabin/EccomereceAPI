@@ -13,7 +13,7 @@ namespace Eccommerec_BLL.GenericRepository.Interface
         T GetById(int id);
         void Delete(T entity);
         void DeleteById(int id);
-        void Update(T entity);
+        Task<T> Update(T entity);
         IQueryable<T> GetDatas();
     }
 }

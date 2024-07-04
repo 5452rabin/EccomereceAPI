@@ -24,5 +24,7 @@ namespace Ecommerece_DAL.Model
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
+        public bool IsExplored { get; set; }
+
     }
 }

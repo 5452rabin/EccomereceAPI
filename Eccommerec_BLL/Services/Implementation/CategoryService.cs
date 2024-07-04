@@ -33,7 +33,7 @@ namespace Eccommerec_BLL.Services.Implementation
                 _uow.Repository<Category>().AddAsync(category);
                 _uow.SaveChangesAsync();
                 transacyion.Commit();
-                CategoryDTO categoryDTO = new CategoryDTO() { CategoryName = category.CategoryName };
+                CategoryDTO categoryDTO = _mapper.Map<CategoryDTO>(category);
                 return categoryDTO;
             }
             catch (Exception ex)
